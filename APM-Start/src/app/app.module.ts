@@ -14,13 +14,7 @@ import { PageNotFoundComponent } from './page-not-found.component';
 import { ProductModule } from './products/product.module';
 import { UserModule } from './user/user.module';
 import { MessageModule } from './messages/message.module';
-import { RouterModule, Routes } from '@angular/router';
-
-const routes: Routes = [
-  { path: 'welcome', component: WelcomeComponent },
-  { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
-];
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   imports: [
@@ -30,9 +24,7 @@ const routes: Routes = [
     ProductModule,
     UserModule,
     MessageModule,
-    RouterModule.forRoot(
-      routes
-    )
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,
