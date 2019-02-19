@@ -8,6 +8,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductListComponent } from './product-list.component';
 import { ProductResolverService } from './product-resolver.service';
 import { AuthGuard } from '../user/auth.guard';
+import { ProductEditGuard } from './product-edit/product-edit.guard';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { AuthGuard } from '../user/auth.guard';
             path: ':id/edit',
             component: ProductEditComponent,
             resolve: { product: ProductResolverService },
+            canDeactivate: [ProductEditGuard],
             children: [
               { path: '', redirectTo: 'info', pathMatch: 'full' },
               { path: 'info', component: ProductEditInfoComponent },
