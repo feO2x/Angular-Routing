@@ -4,7 +4,7 @@ import { MessageService } from '../../messages/message.service';
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   templateUrl: './product-edit.component.html',
@@ -19,7 +19,8 @@ export class ProductEditComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private messageService: MessageService,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(parameterMap => {
@@ -80,6 +81,7 @@ export class ProductEditComponent implements OnInit {
             (error: any) => this.errorMessage = <any>error
           );
       }
+      
     } else {
       this.errorMessage = 'Please correct the validation errors.';
     }
@@ -89,7 +91,6 @@ export class ProductEditComponent implements OnInit {
     if (message) {
       this.messageService.addMessage(message);
     }
-
-    // Navigate back to the product list
+    this.router.navigate(['/products']);
   }
 }
