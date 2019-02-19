@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-import { MessageService } from '../../messages/message.service';
-
-import { Product } from '../product';
-import { ProductService } from '../product.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from '../../messages/message.service';
+import { Product, ProductResolved } from '../product';
+import { ProductService } from '../product.service';
 
 @Component({
   templateUrl: './product-edit.component.html',
@@ -23,18 +21,13 @@ export class ProductEditComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(parameterMap => {
-      const id = +parameterMap.get('id');
-      this.getProduct(id);
-    });
-  }
 
-  getProduct(id: number): void {
-    this.productService.getProduct(id)
-      .subscribe(
-        (product: Product) => this.onProductRetrieved(product),
-        (error: any) => this.errorMessage = <any>error
-      );
+    this.activatedRoute.data.subscribe(data => {
+      const resolvedData: ProductResolved = data['product'];
+      this.errorMessage = resolvedData.error;
+      this.onProductRetrieved(resolvedData.product);
+    })
+    
   }
 
   onProductRetrieved(product: Product): void {
