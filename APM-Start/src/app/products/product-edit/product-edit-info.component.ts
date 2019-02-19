@@ -16,9 +16,16 @@ export class ProductEditInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.parent.data.subscribe(data => {
+
+      this.resetForm();
+
       const productResolved: ProductResolved = data['product'];
       this.errorMessage = productResolved.error;
       this.product = productResolved.product;
     });
+  }
+  resetForm(): void {
+    if (this.productForm)
+      this.productForm.reset();
   }
 }
