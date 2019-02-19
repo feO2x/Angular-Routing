@@ -1,3 +1,6 @@
+<span class="fa fa-spinner spinner"
+      *ngIf="isLoading"></span>
+
 <nav class="navbar navbar-expand navbar-light bg-light">
   <a class="navbar-brand">{{pageTitle}}</a>
   <ul class="navbar-nav">
@@ -30,7 +33,6 @@
     </li>
   </ul>
 </nav>
-<div class="container"
-     [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
+<div class="container">
   <router-outlet #o="outlet"></router-outlet>
 </div>
